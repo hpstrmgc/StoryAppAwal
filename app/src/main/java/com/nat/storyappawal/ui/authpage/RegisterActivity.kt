@@ -1,12 +1,16 @@
 package com.nat.storyappawal.ui.authpage
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.nat.storyappawal.R
 import com.nat.storyappawal.data.api.ApiServiceFactory
 import com.nat.storyappawal.databinding.ActivityRegisterBinding
 
@@ -20,6 +24,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply sequential fade-in animation to each view
+        applySequentialFadeInAnimation()
 
         binding.buttonRegister.setOnClickListener {
             val name = binding.edRegisterName.text.toString()
@@ -43,6 +50,29 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun applySequentialFadeInAnimation() {
+        val views = listOf(
+            binding.imageView,
+            binding.textViewRegister1,
+            binding.textViewRegister2,
+            binding.edRegisterName,
+            binding.edRegisterEmail,
+            binding.edRegisterPassword,
+            binding.buttonRegister,
+            binding.textViewLinkToLogin
+        )
+
+        val animatorSet = AnimatorSet()
+        val animators = views.mapIndexed { index, view ->
+            ObjectAnimator.ofFloat(view, View.ALPHA, 0f, 1f).apply {
+                duration = 200
+                startDelay = index * 100L
+            }
+        }
+        animatorSet.playSequentially(animators)
+        animatorSet.start()
     }
 
     private fun showProgressBar(show: Boolean) {

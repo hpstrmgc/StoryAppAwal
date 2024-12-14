@@ -1,5 +1,7 @@
 package com.nat.storyappawal.ui.authpage
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.nat.storyappawal.R
 import com.nat.storyappawal.data.api.ApiServiceFactory
 import com.nat.storyappawal.databinding.ActivityLoginBinding
 import com.nat.storyappawal.ui.stories.StoryActivity
@@ -21,6 +24,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply sequential fade-in animation to each view
+        applySequentialFadeInAnimation()
 
         // Check if user is already logged in
         if (isUserLoggedIn()) {
@@ -50,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 result.onFailure {
-                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login failed, check your email and password", Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -59,6 +65,28 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun applySequentialFadeInAnimation() {
+        val views = listOf(
+            binding.imageView,
+            binding.textViewRegister1,
+            binding.textViewRegister2,
+            binding.edLoginEmail,
+            binding.edLoginPassword,
+            binding.buttonLogin,
+            binding.textViewLinkToRegister
+        )
+
+        val animatorSet = AnimatorSet()
+        val animators = views.mapIndexed { index, view ->
+            ObjectAnimator.ofFloat(view, View.ALPHA, 0f, 1f).apply {
+                duration = 200
+                startDelay = index * 100L
+            }
+        }
+        animatorSet.playSequentially(animators)
+        animatorSet.start()
     }
 
     private fun saveToken(token: String) {
