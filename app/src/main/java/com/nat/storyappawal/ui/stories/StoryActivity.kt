@@ -37,11 +37,19 @@ class StoryActivity : AppCompatActivity() {
 
         binding.buttonCreate.setOnClickListener {
             val intent = Intent(this, NewStoryActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_NEW_STORY)
         }
 
         setupRecyclerView()
         observeStories()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_NEW_STORY && resultCode == RESULT_OK) {
+            // Refresh stories when a new story is successfully uploaded
+            observeStories()
+        }
     }
 
     private fun isUserLoggedIn(): Boolean {
@@ -91,5 +99,9 @@ class StoryActivity : AppCompatActivity() {
 
     private fun showProgressBar(show: Boolean) {
         binding.progressIndicator.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        private const val REQUEST_CODE_NEW_STORY = 1
     }
 }

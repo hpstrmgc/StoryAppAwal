@@ -9,18 +9,26 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.nat.storyappawal.R
 import com.nat.storyappawal.databinding.ActivityNewStoryBinding
 import com.nat.storyappawal.utils.getImageUri
 import com.nat.storyappawal.utils.reduceFileImage
 import com.nat.storyappawal.utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class NewStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewStoryBinding
     private var currentImageUri: Uri? = null
+    private val newStoryViewModel: NewStoryViewModel by viewModels()
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -55,6 +63,17 @@ class NewStoryActivity : AppCompatActivity() {
         binding.buttonBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+
+        newStoryViewModel.fileUploadResponse.observe(this, Observer { response ->
+            showLoading(false)
+            if (response.error) {
+                showToast(response.message)
+            } else {
+                showToast("Story uploaded successfully")
+                setResult(RESULT_OK) // Set result to indicate success
+                finish()
+            }
+        })
     }
 
     private fun startGallery() {
@@ -98,30 +117,29 @@ class NewStoryActivity : AppCompatActivity() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
-            val description = "This is an image description"
+            val description = binding.edAddDescription.text.toString()
 
-//            showLoading(true)
-//            val requestBody = description.toRequestBody("text/plain".toMediaType())
-//            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-//            val multipartBody = MultipartBody.Part.createFormData(
-//                "photo",
-//                imageFile.name,
-//                requestImageFile
-//            )
-//            lifecycleScope.launch {
-//                try {
-//                    val apiService = ApiConfig.getApiService()
-//                    val successResponse = apiService.uploadImage(multipartBody, requestBody)
-//                    showToast(successResponse.message)
-//                    showLoading(false)
-//                } catch (e: HttpException) {
-//                    val errorBody = e.response()?.errorBody()?.string()
-//                    val errorResponse = Gson().fromJson(errorBody, FileUploadResponse::class.java)
-//                    showToast(errorResponse.message)
-//                    showLoading(false)
-//                }
-//            }
+            showLoading(true)
+            val requestBody = description.toRequestBody("text/plain".toMediaType())
+            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = MultipartBody.Part.createFormData(
+                "photo",
+                imageFile.name,
+                requestImageFile
+            )
+            val token = getTokenFromPreferences()
+            if (token != null) {
+                newStoryViewModel.uploadStory(token, requestBody, multipartBody)
+            } else {
+                showLoading(false)
+                showToast("Token is null")
+            }
         } ?: showToast(getString(R.string.empty_image_warning))
+    }
+
+    private fun getTokenFromPreferences(): String? {
+        val sharedPreferences = getSharedPreferences("your_app_preferences", MODE_PRIVATE)
+        return sharedPreferences.getString("token", null)
     }
 
     private fun showLoading(isLoading: Boolean) {
