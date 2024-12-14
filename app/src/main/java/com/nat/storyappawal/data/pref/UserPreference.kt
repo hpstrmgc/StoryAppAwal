@@ -1,4 +1,4 @@
-package com.nat.storyappawal.utils
+package com.nat.storyappawal.data.pref
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

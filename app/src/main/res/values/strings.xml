@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">StoryAppAwal</string>
+    <string name="app_name">StoryApp by A014B4KY2223</string>
     <string name="empty_image_warning">Image cannot be empty</string>
     <string name="no_media_selected">No media selected</string>
     <string name="camera_failed">Camera failed</string>
     <string name="session_expired">Please login again to access this feature.</string>
     <string name="permission_denied">Permission denied. Please grant the camera permission to use the camera feature.</string>
     <string name="empty_description_warning">Please create a description for the image</string>
+    <string name="storyapp_logo">StoryApp Logo</string>
 </resources>

@@ -22,6 +22,15 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Check if user is already logged in
+        if (isUserLoggedIn()) {
+            startActivity(Intent(this, StoryActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+            finish()
+            return
+        }
+
         binding.buttonLogin.setOnClickListener {
             val email = binding.edLoginEmail.text.toString()
             val password = binding.edLoginPassword.text.toString()
@@ -32,7 +41,9 @@ class LoginActivity : AppCompatActivity() {
                     response.loginResult?.token?.let { token ->
                         saveToken(token)
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, StoryActivity::class.java))
+                        startActivity(Intent(this, StoryActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        })
                         finish()
                     } ?: run {
                         Toast.makeText(this, "Login failed: Token is null", Toast.LENGTH_SHORT).show()
@@ -53,6 +64,11 @@ class LoginActivity : AppCompatActivity() {
     private fun saveToken(token: String) {
         val sharedPreferences = getSharedPreferences("your_app_preferences", MODE_PRIVATE)
         sharedPreferences.edit().putString("token", token).apply()
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        val sharedPreferences = getSharedPreferences("your_app_preferences", MODE_PRIVATE)
+        return !sharedPreferences.getString("token", null).isNullOrEmpty()
     }
 
     private fun showProgressBar(show: Boolean) {

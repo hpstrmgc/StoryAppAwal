@@ -3,7 +3,7 @@ package com.nat.storyappawal.data.repository
 import android.util.Log
 import com.nat.storyappawal.data.api.ApiService
 import com.nat.storyappawal.data.api.response.StoryResponse
-import com.nat.storyappawal.utils.UserPreference
+import com.nat.storyappawal.data.pref.UserPreference
 import retrofit2.HttpException
 
 class StoryRepository private constructor(

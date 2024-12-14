@@ -40,6 +40,10 @@ class StoryActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_NEW_STORY)
         }
 
+        binding.actionLogout.setOnClickListener {
+            logout()
+        }
+
         setupRecyclerView()
         observeStories()
     }
@@ -99,6 +103,18 @@ class StoryActivity : AppCompatActivity() {
 
     private fun showProgressBar(show: Boolean) {
         binding.progressIndicator.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun logout() {
+        val sharedPreferences = getSharedPreferences("your_app_preferences", MODE_PRIVATE)
+        sharedPreferences.edit().remove("token").apply()
+        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
+    override fun onBackPressed() {
+        finishAffinity() // close the app, not going to the previous activity
     }
 
     companion object {

@@ -3,7 +3,7 @@ package com.nat.storyappawal.data.di
 import android.content.Context
 import com.nat.storyappawal.data.api.ApiConfig
 import com.nat.storyappawal.data.repository.StoryRepository
-import com.nat.storyappawal.utils.UserPreference
+import com.nat.storyappawal.data.pref.UserPreference
 import com.nat.storyappawal.utils.dataStore
 
 object Injection {
