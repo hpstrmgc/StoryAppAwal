@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbarDetailsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarDetails"
+                style="@style/CustomToolbarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/custom_toolbar_height1"
+                android:background="#F7931E">
+
+                <TextView
+                    android:id="@+id/toolbar_title_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Details"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarDetailsTitle"
+            app:layout_constraintStart_toStartOf="@+id/toolbarDetailsTitle"
+            app:layout_constraintTop_toTopOf="@+id/toolbarDetailsTitle"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+        <ImageView
+            android:id="@+id/iv_details_photo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarDetailsTitle"
+            app:srcCompat="@drawable/drawing2" />
+
+        <TextView
+            android:id="@+id/tvTextBeforeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/inter"
+            android:gravity="center"
+            android:text="This story was presented by:"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_details_photo" />
+
+        <TextView
+            android:id="@+id/tv_author_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center"
+            android:text="Dicoding"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvTextBeforeName"
+            app:layout_constraintStart_toStartOf="@+id/tvTextBeforeName"
+            app:layout_constraintTop_toBottomOf="@+id/tvTextBeforeName" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author_name" />
+
+        <TextView
+            android:id="@+id/tv_description_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter"
+            android:text="Anya adalah seorang gadis penasaran yang tinggal di desa terpencil dekat hutan misterius. Ia memiliki kemampuan magis yang tersembunyi, yaitu kemampuan untuk berkomunikasi dengan hewan. Suatu hari, hutan tempat tinggalnya diserang oleh makhluk jahat yang ingin menguasai sumber air ajaib. Hewan-hewan sahabat Anya memohon bantuannya.  Dengan keberanian yang besar, Anya memutuskan untuk menghadapi makhluk jahat itu. Ia mengumpulkan semua hewan di hutan dan bersama-sama mereka menyusun rencana. Dengan bantuan siput ajaib yang bisa membuat jaring kuat, burung hantu yang bisa melihat jauh, dan rusa yang bisa berlari cepat, Anya berhasil mengalahkan makhluk jahat tersebut dan menyelamatkan hutannya.  "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <TextView
+            android:id="@+id/tvTextBeforeDateCreated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter"
+            android:text="Created at:"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description_details" />
+
+        <TextView
+            android:id="@+id/tv_created_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/inter"
+            android:text="01/10/2024"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTextBeforeDateCreated"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
