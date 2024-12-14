@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -34,6 +35,7 @@ class NewStoryActivity : AppCompatActivity() {
     ) { isGranted: Boolean ->
         if (isGranted) {
             Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+            startCamera()
         } else {
             Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
         }
@@ -42,6 +44,25 @@ class NewStoryActivity : AppCompatActivity() {
     private fun allPermissionsGranted() = ContextCompat.checkSelfPermission(
         this, REQUIRED_PERMISSION
     ) == PackageManager.PERMISSION_GRANTED
+
+    private fun showPermissionRationaleDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Camera Permission Required")
+            .setMessage("This app needs camera access to take pictures. Please grant permission in the app settings.")
+            .setPositiveButton("Open Settings") { _, _ ->
+                // Open Settings
+                val intent = android.content.Intent(
+                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    android.net.Uri.fromParts("package", packageName, null)
+                )
+                intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +74,19 @@ class NewStoryActivity : AppCompatActivity() {
         }
 
         binding.buttonGallery.setOnClickListener { startGallery() }
-        binding.buttonCamera.setOnClickListener { startCamera() }
+        binding.buttonCamera.setOnClickListener {
+            when {
+                allPermissionsGranted() -> {
+                    startCamera()
+                }
+                shouldShowRequestPermissionRationale(REQUIRED_PERMISSION) -> {
+                    showPermissionRationaleDialog()
+                }
+                else -> {
+                    requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+                }
+            }
+        }
         binding.buttonAdd.setOnClickListener { uploadImage() }
 
         binding.buttonBack.setOnClickListener {
@@ -66,7 +99,7 @@ class NewStoryActivity : AppCompatActivity() {
                 showToast(response.message)
             } else {
                 showToast("Story uploaded successfully")
-                setResult(RESULT_OK) // Set result to indicate success
+                setResult(RESULT_OK)
                 finish()
             }
         })
