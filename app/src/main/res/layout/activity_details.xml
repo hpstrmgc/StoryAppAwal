@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -105,7 +106,7 @@
             android:text="Anya adalah seorang gadis penasaran yang tinggal di desa terpencil dekat hutan misterius. Ia memiliki kemampuan magis yang tersembunyi, yaitu kemampuan untuk berkomunikasi dengan hewan. Suatu hari, hutan tempat tinggalnya diserang oleh makhluk jahat yang ingin menguasai sumber air ajaib. Hewan-hewan sahabat Anya memohon bantuannya.  Dengan keberanian yang besar, Anya memutuskan untuk menghadapi makhluk jahat itu. Ia mengumpulkan semua hewan di hutan dan bersama-sama mereka menyusun rencana. Dengan bantuan siput ajaib yang bisa membuat jaring kuat, burung hantu yang bisa melihat jauh, dan rusa yang bisa berlari cepat, Anya berhasil mengalahkan makhluk jahat tersebut dan menyelamatkan hutannya.  "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/tvTextBeforeDateCreated"
@@ -136,6 +137,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTextBeforeDateCreated"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Description:"
+            android:fontFamily="@font/inter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

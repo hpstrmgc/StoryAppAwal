@@ -3,6 +3,7 @@ package com.nat.storyappawal.ui.stories
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -65,7 +66,9 @@ class StoryActivity : AppCompatActivity() {
         val token = getTokenFromPreferences()
         if (token != null) {
             Log.d("StoryActivity", "Token: $token")
+            showProgressBar(true)
             storyViewModel.getStories(token).observe(this) { storyResponse ->
+                showProgressBar(false)
                 if (storyResponse != null) {
                     val stories = storyResponse.listStory.map { listStoryItem ->
                         Story(
@@ -84,5 +87,9 @@ class StoryActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Token is null", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showProgressBar(show: Boolean) {
+        binding.progressIndicator.visibility = if (show) View.VISIBLE else View.GONE
     }
 }
