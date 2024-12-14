@@ -28,6 +28,7 @@ class NewStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewStoryBinding
     private var currentImageUri: Uri? = null
+    private var tempImageUri: Uri? = null
     private val newStoryViewModel: NewStoryViewModel by viewModels()
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -114,6 +115,7 @@ class NewStoryActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
+            tempImageUri = uri
             showImage()
         } else {
             Log.d("Photo Picker", "No media selected")
@@ -131,7 +133,8 @@ class NewStoryActivity : AppCompatActivity() {
         if (isSuccess) {
             showImage()
         } else {
-            currentImageUri = null
+            currentImageUri = tempImageUri
+            showImage()
         }
     }
 
