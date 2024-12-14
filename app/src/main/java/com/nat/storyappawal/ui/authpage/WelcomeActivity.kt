@@ -3,11 +3,7 @@ package com.nat.storyappawal.ui.authpage
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.nat.storyappawal.databinding.ActivityWelcomeBinding
-import com.nat.storyappawal.ui.stories.StoryActivity
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding

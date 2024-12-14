@@ -28,7 +28,11 @@ class NewStoryViewModel : ViewModel() {
                 val response = apiService.uploadStory("Bearer $token", description, photo, lat, lon)
                 _fileUploadResponse.postValue(response)
             } catch (e: Exception) {
-                _fileUploadResponse.postValue(FileUploadResponse(true, e.message ?: "Unknown error"))
+                _fileUploadResponse.postValue(
+                    FileUploadResponse(
+                        true, e.message ?: "Unknown error"
+                    )
+                )
             }
         }
     }

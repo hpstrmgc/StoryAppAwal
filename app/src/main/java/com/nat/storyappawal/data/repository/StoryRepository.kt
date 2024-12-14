@@ -7,8 +7,7 @@ import com.nat.storyappawal.data.pref.UserPreference
 import retrofit2.HttpException
 
 class StoryRepository private constructor(
-    private val apiService: ApiService,
-    private val userPreference: UserPreference
+    private val apiService: ApiService, private val userPreference: UserPreference
 ) {
 
     suspend fun getStories(token: String): StoryResponse {

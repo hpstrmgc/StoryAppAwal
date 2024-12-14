@@ -20,7 +20,6 @@ import com.nat.storyappawal.utils.reduceFileImage
 import com.nat.storyappawal.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
@@ -30,22 +29,19 @@ class NewStoryActivity : AppCompatActivity() {
     private var currentImageUri: Uri? = null
     private val newStoryViewModel: NewStoryViewModel by viewModels()
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
-            }
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
         }
+    }
 
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
+    private fun allPermissionsGranted() = ContextCompat.checkSelfPermission(
+        this, REQUIRED_PERMISSION
+    ) == PackageManager.PERMISSION_GRANTED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,9 +119,7 @@ class NewStoryActivity : AppCompatActivity() {
             val requestBody = description.toRequestBody("text/plain".toMediaType())
             val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
             val multipartBody = MultipartBody.Part.createFormData(
-                "photo",
-                imageFile.name,
-                requestImageFile
+                "photo", imageFile.name, requestImageFile
             )
             val token = getTokenFromPreferences()
             if (token != null) {

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.nat.storyappawal.R
 import com.nat.storyappawal.data.api.ApiServiceFactory
 import com.nat.storyappawal.databinding.ActivityLoginBinding
 import com.nat.storyappawal.ui.stories.StoryActivity
@@ -52,11 +51,14 @@ class LoginActivity : AppCompatActivity() {
                         })
                         finish()
                     } ?: run {
-                        Toast.makeText(this, "Login failed: Token is null", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login failed: Token is null", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
                 result.onFailure {
-                    Toast.makeText(this, "Login failed, check your email and password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Login failed, check your email and password", Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
         }

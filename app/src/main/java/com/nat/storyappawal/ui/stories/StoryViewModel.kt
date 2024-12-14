@@ -16,7 +16,7 @@ class StoryViewModel(private val repository: StoryRepository) : ViewModel() {
             emit(stories)
         } catch (e: HttpException) {
             Log.e("StoryViewModel", "Error fetching stories", e)
-            emit(null) // Handle the error appropriately
+            emit(null)
         }
     }
 }
@@ -24,8 +24,7 @@ class StoryViewModel(private val repository: StoryRepository) : ViewModel() {
 class StoryViewModelFactory(private val repository: StoryRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return StoryViewModel(repository) as T
+            @Suppress("UNCHECKED_CAST") return StoryViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

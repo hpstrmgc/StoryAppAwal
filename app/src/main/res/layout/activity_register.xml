@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,13 +31,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Create an Account"
+                    android:text="@string/create_an_account"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
+            android:contentDescription="@string/app_logo_for_register_cd"
             android:id="@+id/imageView"
             android:layout_width="250dp"
             android:layout_height="250dp"
@@ -61,7 +61,7 @@
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/inter_bold"
             android:gravity="center"
-            android:text="Ready to Join the Fun?"
+            android:text="@string/ready_to_join_the_fun"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/inter"
             android:gravity="center"
-            android:text="Let's create an account and join us, you won't regret it!"
+            android:text="@string/let_s_create_an_account"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
             android:drawablePadding="12dp"
             android:ems="10"
             android:fontFamily="@font/inter"
-            android:hint="name"
+            android:hint="@string/name"
             android:inputType="text"
             android:padding="8dp"
             android:textSize="12sp"
@@ -121,7 +121,7 @@
             android:drawablePadding="12dp"
             android:ems="10"
             android:fontFamily="@font/inter"
-            android:hint="email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="8dp"
             android:textSize="12sp"
@@ -144,7 +144,7 @@
             android:drawablePadding="12dp"
             android:ems="10"
             android:fontFamily="@font/inter"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="8dp"
             android:textSize="12sp"
@@ -162,7 +162,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/inter_bold"
-            android:text="Create Account"
+            android:text="@string/create_account"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -181,7 +181,7 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/inter_bold"
             android:gravity="center"
-            android:text="I already have an account ↗"
+            android:text="@string/i_already_have_an_account"
             android:textColor="#BB6500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,8 +194,8 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:indeterminate="true"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarRegisterTitle" />

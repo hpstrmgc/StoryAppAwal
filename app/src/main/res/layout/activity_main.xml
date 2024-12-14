@@ -10,19 +10,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Open Stories" />
+        android:text="@string/open_stories" />
 
     <Button
         android:id="@+id/btnOpenDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Open Details" />
+        android:text="@string/open_details" />
 
     <Button
         android:id="@+id/btnOpenWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Open Welcome" />
+        android:text="@string/open_welcome" />
 </LinearLayout>

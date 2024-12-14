@@ -23,14 +23,13 @@ class StoryAdapter : ListAdapter<Story, StoryAdapter.StoryViewHolder>(DIFF_CALLB
         holder.bind(story)
     }
 
-    class StoryViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class StoryViewHolder(private val binding: ItemStoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             binding.tvItemName.text = story.title
             binding.tvItemDescription.text = story.description
             binding.createdAtText.text = story.createdAt
-            Glide.with(binding.ivItemPhoto.context)
-                .load(story.photoUrl)
-                .into(binding.ivItemPhoto)
+            Glide.with(binding.ivItemPhoto.context).load(story.photoUrl).into(binding.ivItemPhoto)
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

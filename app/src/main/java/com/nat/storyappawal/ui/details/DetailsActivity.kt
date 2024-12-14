@@ -19,14 +19,11 @@ class DetailsActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Get story details from intent
-        val storyId = intent.getStringExtra(EXTRA_STORY_ID)
         val storyName = intent.getStringExtra(EXTRA_STORY_NAME)
         val storyDescription = intent.getStringExtra(EXTRA_STORY_DESCRIPTION)
         val storyPhotoUrl = intent.getStringExtra(EXTRA_STORY_PHOTO_URL)
         val storyCreatedAt = intent.getStringExtra(EXTRA_STORY_CREATED_AT)
 
-        // Set story details to views
         binding.tvAuthorName.text = storyName
         binding.tvDescriptionDetails.text = storyDescription
         binding.tvCreatedAt.text = storyCreatedAt
